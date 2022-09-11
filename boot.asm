@@ -1,9 +1,16 @@
 ORG 0
 BITS 16
 
-jmp 0x7c0:start
+_start:
+    jmp short start
+    nop
+
+times 33 db 0 ; BIOS Parameter Block
 
 start:
+    jmp 0x7c0:step2
+
+step2:
     cli ; clear interrupts
     ; this is so hardware interrupts dont affect our setup now
     mov ax, 0x7c0
